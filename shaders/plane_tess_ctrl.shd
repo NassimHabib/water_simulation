@@ -1,0 +1,24 @@
+#version 450
+
+layout(vertices=4) out;
+
+uniform int u_tesselation_level;
+
+in vec3 vs_position[];
+
+out vec3 tsc_position[];
+
+void main() {
+
+    gl_TessLevelOuter[0] = u_tesselation_level;
+    gl_TessLevelOuter[1] = u_tesselation_level;
+    gl_TessLevelOuter[2] = u_tesselation_level;
+    gl_TessLevelOuter[3] = u_tesselation_level;
+
+    gl_TessLevelInner[0] = u_tesselation_level;
+    gl_TessLevelInner[1] = u_tesselation_level;
+
+    gl_out[gl_InvocationID].gl_Position = gl_in[gl_InvocationID].gl_Position;
+
+    tsc_position[gl_InvocationID] = vs_position[gl_InvocationID];
+}
